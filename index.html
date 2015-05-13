@@ -55,13 +55,10 @@
             <a class="glyphicon glyphicon-trash btn btn-danger" ng-click="delete($index)"></a>
           </span>
           <span class="badge">
-            {{quote.ratings.likes}}likes
+            <a class="glyphicon glyphicon-thumbs-up btn btn-primary" ng-click="like($index)"></a>{{quote.ratings.likes}}likes
           </span>
           <span class="badge">
-            <a class="glyphicon glyphicon-thumbs-up btn btn-primary" ng-click="like($index)"></a>{{quote.ratings.dislikes}} dislikes
-          </span>
-          <span class="badge">
-            <a class="glyphicon glyphicon-thumbs-down btn btn-primary" ng-click="dislike($index)"></a>
+            <a class="glyphicon glyphicon-thumbs-down btn btn-primary" ng-click="dislike($index)"></a>{{quote.ratings.dislikes}} dislikes
           </span>
         </li>
       </ul>
