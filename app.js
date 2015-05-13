@@ -8,13 +8,10 @@ app.controller('main', ['$scope', 'localStorageService', 'ModalService', functio
 
   if (localStorageService.get('quotes')) {
     $scope.quoteList = localStorageService.get('quotes');
-    console.log($scope.quoteList);
-    // $scope.quoteList = JSON.parse($scope.quoteList);
+
   } else {
     $scope.quoteList = [];
-    console.log($scope.quoteList);
   }
-
 
   $scope.loveQs = false;
   $scope.showQs = false;
@@ -39,30 +36,29 @@ app.controller('main', ['$scope', 'localStorageService', 'ModalService', functio
     $scope.category = '';
   };
 
-
-  $scope.editQuote = function(index) {
+  $scope.editQuote = function(quote, index) {
+    console.log('bag', quote);
     console.log('haha');
     ModalService.showModal({
       templateUrl: "modal.html",
-      controller: "main"
+      controller: "edit",
+      inputs: {
+        'quote': quote
+      }
     }).then(function(modal) {
-      console.log(modal);
+
       //it's a bootstrap element, use 'modal' to show it
       modal.element.modal();
       modal.close.then(function(result) {
-        console.log(result);
+        console.log('after editing this is the quote', result);
+        $scope.quoteList[index] = result;
+        localStorageService.set('quotes', $scope.quoteList);
       });
+
     });
-    // get the quote that was clicked
-    // use the index
-    // go through the array and pick the right quote
-    // then set $scope.author to the one to picked above
-    // then set $scope.quotename to the one to picked above
-    //console.log('it should show this', $scope.quoteList[index].name);
-    /*$scope.quoteName = $scope.quoteList[index].name;
-    $scope.author = $scope.quoteList[index].author;*/
 
   };
+
   $scope.delete = function(index) {
     var delQuote = confirm("Are you sure you want to delete?");
     if (delQuote === true) {
@@ -80,7 +76,6 @@ app.controller('main', ['$scope', 'localStorageService', 'ModalService', functio
     } else {
       $scope.quoteList[index].ratings.dislikes = 0;
     }
-
     localStorageService.set('quotes', $scope.quoteList);
   };
 
@@ -123,4 +118,19 @@ app.controller('main', ['$scope', 'localStorageService', 'ModalService', functio
     // $scope.categoryData = localStorageService.get('category');
     // console.log($scope.categoryData);
   };
+}]);
+
+app.controller('edit', ['$scope', 'localStorageService', 'ModalService', 'quote', 'close', function($scope, localStorageService, ModalService, quote, close) {
+
+  $scope.editQuote = angular.copy(quote);
+
+  $scope.close = function() {
+
+    close($scope.editQuote, 500); // close, but give 500ms for bootstrap to animate
+  };
+
+  $scope.cancel = function() {
+    close(quote, 500);
+  };
+
 }]);
