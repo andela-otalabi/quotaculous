@@ -13,6 +13,7 @@
     "tests"
   ],
   "dependencies": {
-    "angular-local-storage": "~0.2.0"
+    "angular-local-storage": "~0.2.0",
+    "angular-modal-service": "~0.6.6"
   }
 }

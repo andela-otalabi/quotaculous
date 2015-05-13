@@ -2,12 +2,12 @@
 <html ng-app="root">
 
 <head>
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+  <script src="bower_components/jquery/dist/jquery.js"></script>
+  <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="bower_components/angular/angular.min.js"></script>
   <script src="bower_components/angular-local-storage/dist/angular-local-storage.min.js"></script>
-  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-  <script src="bower_components/angular-xeditable/dist/js/xeditable.js"></script>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+  <script src="bower_components/angular-modal-service/dst/angular-modal-service.min.js"></script>
   <link type="text/css" rel="stylesheet" href="style.css" />
   <title>Quotaculous</title>
 </head>
@@ -19,9 +19,10 @@
       <div class="navbar-header">
         <a class="navbar-brand" href="#">Quotaculous</a>
       </div>
-    </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.container-fluid -->
   </nav>
-
+  <!-- Trigger the modal with a button -->
   <div class="container">
     <div class="row">
       <div class="col-md-8">
@@ -41,40 +42,73 @@
       </div>
     </div>
   </div>
-    <ul>
-      <li ng-repeat="quote in quoteList">
-        <span>"{{quote.name}}" by {{quote.author}} {{quote.category}}</span>
-        <button class="glyphicon glyphicon-pencil" ng-click=""></button>
-        <button class="glyphicon glyphicon-trash btn btn-danger" ng-click="delete($index)"></button>
-        </br>
-        {{quote.ratings.likes}}likes
-        <button class="glyphicon glyphicon-thumbs-up btn btn-primary" ng-click="like($index)"></button>{{quote.ratings.dislikes}} dislikes
-        <button class="glyphicon glyphicon-thumbs-down btn btn-primary" ng-click="dislike($index)"></button>
-      </li>
-    </ul>
-    <button ng-click="load()">Show All Quotes</button>
+  <div class="row quotes-list">
     <br>
-    <div>
-      <ul ng-hide="showQs">
-        <li ng-repeat="quote in data">{{quote.name}} {{quote.author}} Category: {{quote.category}}</li>
-      </ul>
-      <button ng-click="entertainment()">Entertainment</button>
-      <button ng-click="fashion()">Fashion</button>
-      <button ng-click="toggleLove()">Love</button>
-      <button ng-click="religionQ()">Religion</button>
-      <button ng-click="techQ()">Technology</button>
-      <ul ng-hide="loveQs">
-        <li ng-repeat="loves in loveQuotes">
-          <span>"{{loves.name}}" by {{loves.author}}</span>
+    <div class="col-lg-8 col-md-offset-1">
+      <ul class="list-group">
+        <li class="list-group-item" ng-repeat="quote in quoteList">
+          "{{quote.name}}" by {{quote.author}} {{quote.category}}
+          <span class="badge">
+            <button type="button" class="btn btn-info glyphicon glyphicon-pencil" ng-click="editQuote($index)"></button>
+          </span>
+          <span class="badge">
+            <a class="glyphicon glyphicon-trash btn btn-danger" ng-click="delete($index)"></a>
+          </span>
+          <span class="badge">
+            {{quote.ratings.likes}}likes
+          </span>
+          <span class="badge">
+            <a class="glyphicon glyphicon-thumbs-up btn btn-primary" ng-click="like($index)"></a>{{quote.ratings.dislikes}} dislikes
+          </span>
+          <span class="badge">
+            <a class="glyphicon glyphicon-thumbs-down btn btn-primary" ng-click="dislike($index)"></a>
+          </span>
         </li>
       </ul>
-      <!-- Category
+    </div>
+  </div>
+  <button ng-click="load()">Show All Quotes</button>
+  <br>
+  <div>
+    <ul ng-hide="showQs">
+      <li ng-repeat="quote in data">{{quote.name}} {{quote.author}} Category: {{quote.category}}</li>
+    </ul>
+    <button ng-click="entertainment()">Entertainment</button>
+    <button ng-click="fashion()">Fashion</button>
+    <button ng-click="toggleLove()">Love</button>
+    <button ng-click="religionQ()">Religion</button>
+    <button ng-click="techQ()">Technology</button>
+    <ul ng-hide="loveQs">
+      <li ng-repeat="loves in loveQuotes">
+        <span>"{{loves.name}}" by {{loves.author}}</span>
+      </li>
+    </ul>
+    <!-- Category
     <ul ng-repeat="category in categories track by $index">
       <li><a ng-href="{{category}}">{{category}}</a></li>
     </ul>
   </div>
   <!-- <p> {{data}} </p> -->
-      <script type="text/javascript" src="app.js"></script>
+    <script type="text/javascript" src="app.js"></script>
+    <script type="text/ng-template" id="modal.html">
+      <div class="modal fade">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" ng-click="close('Cancel')" data-dismiss="modal" aria-hidden="true">&times;</button>
+              <h4 class="modal-title">Yes or No?</h4>
+            </div>
+            <div class="modal-body">
+              <p>I</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" ng-click="close('No')" class="btn btn-default" data-dismiss="modal">No</button>
+              <button type="button" ng-click="close('Yes')" class="btn btn-primary" data-dismiss="modal">Yes</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </script>
 </body>
 
 </html>

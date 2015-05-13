@@ -38,3 +38,6 @@ input {
    font-size: 30px;
    color: #000;
 }
+.quotes-list .list-group-item {
+  line-height: 40px;
+}
