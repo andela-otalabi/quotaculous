@@ -14,7 +14,7 @@
 
 <body ng-controller="main">
   <nav class="navbar navbar-default">
-    <div class="container-fluid">
+    <div class="container">
       <!-- Brand and toggle get grouped for better mobile display -->
       <div class="navbar-header">
         <a class="navbar-brand" href="#">Quotaculous</a>
@@ -23,14 +23,14 @@
     <!-- /.container-fluid -->
   </nav>
   <!-- Trigger the modal with a button -->
-  <div class="container">
+  <div class="container main-wrapper">
     <div class="row">
-      <div class="col-md-8">
+      <div class="col-md-10">
         <input type="textbox" placeholder="enter author's name" ng-model="author" />
         <input id="quote" type="textbox" placeholder="enter new quote here" ng-model="quoteName" />
       </div>
-      <div class="col-md-4" details-wrapper>
-        <select ng-model="category">
+      <div class="col-md-2 dropdown-wrapper">
+        <select class="btn btn-default select-btn" ng-model="category">
           <option value="entertainment">Entertainment</option>
           <option value="fashion">Fashion</option>
           <option value="love">Love</option>
@@ -38,78 +38,70 @@
           <option value="tech">Technology</option>
         </select>
         <br />
-        <button ng-click="submit()">Submit</button>
+        <button class="btn btn-success" ng-click="submit()">Submit</button>
       </div>
     </div>
   </div>
-  <div class="row quotes-list">
-    <br>
-    <div class="col-lg-8 col-md-offset-1">
-      <ul class="list-group">
-        <li class="list-group-item" ng-repeat="quote in quoteList">
-          "{{quote.name}}" by {{quote.author}} {{quote.category}}
-          <span class="badge">
-            <button type="button" class="btn btn-info glyphicon glyphicon-pencil" ng-click="editQuote(quoteList[$index], $index)"></button>
-          </span>
-          <span class="badge">
-            <a class="glyphicon glyphicon-trash btn btn-danger" ng-click="delete($index)"></a>
-          </span>
-          <span class="badge">
-            <a class="glyphicon glyphicon-thumbs-up btn btn-primary" ng-click="like($index)"></a>{{quote.ratings.likes}}likes
-          </span>
-          <span class="badge">
-            <a class="glyphicon glyphicon-thumbs-down btn btn-primary" ng-click="dislike($index)"></a>{{quote.ratings.dislikes}} dislikes
-          </span>
+  <!--<ul ng-hide="showQs">-->
+  <!--<li ng-repeat="quote in data">-->
+  <div class="container bottom-wrapper">
+    <div class="col-md-8">
+      <div class="row quotes-list">
+        <a ng-click="load()">Show All Quotes</a>({{quoteList.length}})
+        <ul class="list-group" ng-show="showQs">
+          <li class="list-group-item" ng-repeat="quote in quoteList">
+            "{{quote.name}}" by {{quote.author}} [{{quote.category}}]
+            <span class="badge">
+              <button type="button" class="btn btn-info glyphicon glyphicon-pencil" ng-click="editQuote(quoteList[$index], $index)">Edit</button>
+            </span>
+            <span style="background-color: #d9534f" class="badge">
+              <a class="glyphicon glyphicon-trash" ng-click="delete($index)">Delete</a>
+            </span>
+            <span class="badge">
+              <a class="glyphicon glyphicon-thumbs-up btn btn-primary" ng-click="like($index)"></a>{{quote.ratings.likes}}likes
+            </span>
+            <span class="badge">
+              <a class="glyphicon glyphicon-thumbs-down btn btn-primary" ng-click="dislike($index)"></a>{{quote.ratings.dislikes}} dislikes
+            </span>
+          </li>
+        </ul>
+      </div>
+      <a ng-click="getQuotes('entertainment')">Entertainment</a></br>
+      <a ng-click="getQuotes('fashion')">Fashion</a></br>
+      <a ng-click="getQuotes('love')">Love</a></br>
+      <a ng-click="getQuotes('religion')">Religion</a></br>
+      <a ng-click="getQuotes('tech')">Technology</a>
+      <ul ng-show="hideQs">
+        <li ng-repeat="x in allQuotes">
+          <span>"{{x.name}}" by {{x.author}}</span>
         </li>
       </ul>
     </div>
   </div>
-  <button ng-click="load()">Show All Quotes</button>
   <br>
-  <div>
-    <ul ng-hide="showQs">
-      <li ng-repeat="quote in data">{{quote.name}} {{quote.author}} Category: {{quote.category}}</li>
-    </ul>
-    <button ng-click="entertainment()">Entertainment</button>
-    <button ng-click="fashion()">Fashion</button>
-    <button ng-click="toggleLove()">Love</button>
-    <button ng-click="religionQ()">Religion</button>
-    <button ng-click="techQ()">Technology</button>
-    <ul ng-hide="loveQs">
-      <li ng-repeat="loves in loveQuotes">
-        <span>"{{loves.name}}" by {{loves.author}}</span>
-      </li>
-    </ul>
-    <!-- Category
-    <ul ng-repeat="category in categories track by $index">
-      <li><a ng-href="{{category}}">{{category}}</a></li>
-    </ul>
-  </div>
-  <!-- <p> {{data}} </p> -->
-    <script type="text/javascript" src="app.js"></script>
-    <script type="text/ng-template" id="modal.html">
-      <div class="modal fade">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" ng-click="close('Cancel')" data-dismiss="modal" aria-hidden="true">&times;</button>
-              <h4 class="modal-title">Edit Quote</h4>
-            </div>
-            <div class="modal-body">
-              <form>
-                <input type="textbox" placeholder="enter author's name" ng-model="editQuote.author" />
-                <input id="quote" type="textbox" placeholder="enter new quote here" ng-model="editQuote.name" />
-              </form>
-            </div>
-            <div class="modal-footer">
-              <button type="button" ng-click="close()" class="btn btn-primary" data-dismiss="modal">Save</button>
-              <button type="button" ng-click="cancel()" class="btn btn-default" data-dismiss="modal">Cancel</button>
-            </div>
+  <script type="text/javascript" src="app.js"></script>
+  <script type="text/ng-template" id="modal.html">
+    <div class="modal fade">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" ng-click="close('Cancel')" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title">Edit Quote</h4>
+          </div>
+          <div class="modal-body">
+            <form>
+              <input type="textbox" placeholder="enter author's name" ng-model="editQuote.author" />
+              <input id="quote" type="textbox" placeholder="enter new quote here" ng-model="editQuote.name" />
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" ng-click="close()" class="btn btn-primary" data-dismiss="modal">Save</button>
+            <button type="button" ng-click="cancel()" class="btn btn-default" data-dismiss="modal">Cancel</button>
           </div>
         </div>
       </div>
-    </script>
+    </div>
+  </script>
 </body>
 
 </html>
-it

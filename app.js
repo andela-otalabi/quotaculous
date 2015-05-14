@@ -13,27 +13,31 @@ app.controller('main', ['$scope', 'localStorageService', 'ModalService', functio
     $scope.quoteList = [];
   }
 
-  $scope.loveQs = false;
+  $scope.hideQs = false;
   $scope.showQs = false;
 
   $scope.submit = function() {
-    var quote = {
-      'name': $scope.quoteName,
-      'author': $scope.author,
-      'category': $scope.category,
-      ratings: {
-        'likes': 0,
-        'dislikes': 0
-      }
-    };
+    if ($scope.quoteName === '' || $scope.author === '' || $scope.category === '') {
+      alert('quote fields cannot be empty');
+    } else {
+      var quote = {
+        'name': $scope.quoteName,
+        'author': $scope.author,
+        'category': $scope.category,
+        ratings: {
+          'likes': 0,
+          'dislikes': 0
+        }
+      };
 
-    $scope.quoteList.push(quote);
-    localStorageService.set('quotes', $scope.quoteList);
-    var quoteSaved = alert("Your quote has been saved");
-    //clears input field on submit
-    $scope.quoteName = '';
-    $scope.author = '';
-    $scope.category = '';
+      $scope.quoteList.push(quote);
+      localStorageService.set('quotes', $scope.quoteList);
+      var quoteSaved = alert("Your quote has been saved");
+      //clears input field on submit
+      $scope.quoteName = '';
+      $scope.author = '';
+      $scope.category = '';
+    }
   };
 
   $scope.editQuote = function(quote, index) {
@@ -88,35 +92,29 @@ app.controller('main', ['$scope', 'localStorageService', 'ModalService', functio
     } else {
       $scope.quoteList[index].ratings.likes = 0;
     }
-
     localStorageService.set('quotes', $scope.quoteList);
   };
 
-  $scope.toggleLove = function() {
-    $scope.loveQuotes = [];
+  $scope.getQuotes = function(args) {
+    $scope.allQuotes = [];
     $scope.q = localStorageService.get('quotes');
-    for (var i = 0; i < $scope.q.length; i++) {
-      if ($scope.q[i].category === "love") {
-        $scope.loveQuotes.push($scope.q[i]);
+    for (i = 0; i < $scope.q.length; i++) {
+      if ($scope.q[i].category === args) {
+        $scope.allQuotes.push($scope.q[i]);
       }
     }
-    $scope.loveQs = !$scope.loveQs;
+    $scope.hideQs = !$scope.hideQs;
   };
 
   $scope.load = function() {
-    // $scope.category = getUrl();
-    $scope.categories = [];
+    /*$scope.categories = [];
     localStorageService.set('category', $scope.categories);
 
     $scope.data = localStorageService.get('quotes');
     for (var i = 0; i < $scope.data.length; i++) {
       $scope.categories.push($scope.data[i].category);
-    }
+    }*/
     $scope.showQs = !$scope.showQs;
-    // $scope.allCategories = 
-    console.log($scope.categories);
-    // $scope.categoryData = localStorageService.get('category');
-    // console.log($scope.categoryData);
   };
 }]);
 
