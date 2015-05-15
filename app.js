@@ -1,9 +1,5 @@
 var app = angular.module('root', ['LocalStorageModule', 'angularModalService']);
 
-//app.run(function(editableOptions) {
-//  editableOptions.theme = 'bs3'; // bootstrap3 theme. Can be also 'bs2', 'default'
-//});
-
 app.controller('main', ['$scope', 'localStorageService', 'ModalService', function($scope, localStorageService, ModalService) {
 
   if (localStorageService.get('quotes')) {
@@ -15,8 +11,6 @@ app.controller('main', ['$scope', 'localStorageService', 'ModalService', functio
 
   $scope.hideQs = false;
   $scope.showQs = false;
-
-  //$scope.randy = $scope.quoteList[Math.floor(Math.random() * $scope.quoteList.length)];
 
   $scope.submit = function() {
     if ($scope.quoteName === '' || $scope.author === '' || $scope.category === '') {
@@ -97,13 +91,6 @@ app.controller('main', ['$scope', 'localStorageService', 'ModalService', functio
   };
 
   $scope.load = function() {
-    /*$scope.categories = [];
-    localStorageService.set('category', $scope.categories);
-
-    $scope.data = localStorageService.get('quotes');
-    for (var i = 0; i < $scope.data.length; i++) {
-      $scope.categories.push($scope.data[i].category);
-    }*/
     $scope.showQs = !$scope.showQs;
   };
 }]);
