@@ -48,7 +48,6 @@ app.controller('main', ['$scope', 'localStorageService', 'ModalService', functio
       //it's a bootstrap element, use 'modal' to show it
       modal.element.modal();
       modal.close.then(function(result) {
-        console.log('after editing this is the quote', result);
         $scope.quoteList[index] = result;
         localStorageService.set('quotes', $scope.quoteList);
       });
