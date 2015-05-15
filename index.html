@@ -1,3 +1,4 @@
+Skip to content This repository Explore Gist Blog Help @andela-otalabi andela-otalabi Unwatch 2 Star 0 Fork 0andela-otalabi/quotaculous branch: feature/edit-m… quotaculous/index.html @andela-otalabiandela-otalabi 31 minutes ago final commit 1 contributor RawBlameHistory 118 lines (112 sloc) 4.965 kb
 <!DOCTYPE html>
 <html ng-app="root">
 
@@ -15,18 +16,15 @@
 <body ng-controller="main">
   <nav class="navbar navbar-default">
     <div class="container">
-      <!-- Brand and toggle get grouped for better mobile display -->
       <div class="navbar-header">
         <a class="navbar-brand" href="#">Quotaculous</a>
       </div>
     </div>
-    <!-- /.container-fluid -->
   </nav>
   <!-- Trigger the modal with a button -->
   <div class="container main-wrapper">
     <div class="row">
       <div class="col-md-10">
-        <!-- "{{randy.name}}</br>-{{randy.author}}"-->
         <input type="textbox" placeholder="enter author's name" ng-model="author" />
         <input id="quote" type="textbox" placeholder="enter new quote here" ng-model="quoteName" />
       </div>
@@ -70,7 +68,7 @@
             <span>
               <button type="button" class="glyphicon glyphicon-trash btn btn-danger" ng-click="delete($index)">Delete</button>
             </span>
-            <span >
+            <span>
               <button type="button" class="glyphicon glyphicon-thumbs-up btn btn-primary" ng-click="like($index)"></button>{{quote.ratings.likes}} likes
             </span>
             <span>
@@ -86,27 +84,7 @@
       </div>
     </div>
   </div>
-
-    <script type="text/javascript" src="app.js"></script>
-    <script type="text/ng-template" id="modal.html">
-      <div class="modal fade">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" ng-click="close('Cancel')" data-dismiss="modal" aria-hidden="true">&times;</button>
-              <h4 class="modal-title">Yes or No?</h4>
-            </div>
-            <div class="modal-body">
-              
-            </div>
-            <div class="modal-footer">
-              <button type="button" ng-click="close('No')" class="btn btn-default" data-dismiss="modal">No</button>
-              <button type="button" ng-click="close('Yes')" class="btn btn-primary" data-dismiss="modal">Yes</button>
-            </div>
-
   <br>
-
-
   <script type="text/javascript" src="app.js"></script>
   <script type="text/ng-template" id="modal.html">
     <div class="modal fade">
@@ -125,7 +103,6 @@
           <div class="modal-footer">
             <button type="button" ng-click="close()" class="btn btn-primary" data-dismiss="modal">Save</button>
             <button type="button" ng-click="cancel()" class="btn btn-default" data-dismiss="modal">Cancel</button>
-
           </div>
         </div>
       </div>
