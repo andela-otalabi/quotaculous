@@ -26,59 +26,69 @@
   <div class="container main-wrapper">
     <div class="row">
       <div class="col-md-10">
+        <!-- "{{randy.name}}</br>-{{randy.author}}"-->
         <input type="textbox" placeholder="enter author's name" ng-model="author" />
         <input id="quote" type="textbox" placeholder="enter new quote here" ng-model="quoteName" />
       </div>
       <div class="col-md-2 dropdown-wrapper">
+        Category
         <select class="btn btn-default select-btn" ng-model="category">
-          <option value="entertainment">Entertainment</option>
-          <option value="fashion">Fashion</option>
-          <option value="love">Love</option>
-          <option value="religion">Religion</option>
-          <option value="tech">Technology</option>
+          <option value="Entertainment">Entertainment</option>
+          <option value="Fashion">Fashion</option>
+          <option value="Love">Love</option>
+          <option value="Religion">Religion</option>
+          <option value="Technology">Technology</option>
         </select>
         <br />
-        <button class="btn btn-success" ng-click="submit()">Submit</button>
+        <button class="btn btn-default" ng-click="submit()">Submit</button>
       </div>
     </div>
   </div>
-  <!--<ul ng-hide="showQs">-->
-  <!--<li ng-repeat="quote in data">-->
   <div class="container bottom-wrapper">
-    <div class="col-md-8">
+    <div class="col-md-3">
+      <a ng-click="load()">View All Quotes</a>({{quoteList.length}})</br>
+      <a ng-click="getQuotes('Entertainment')">Entertainment</a></br>
+      <a ng-click="getQuotes('Fashion')">Fashion</a></br>
+      <a ng-click="getQuotes('Love')">Love</a></br>
+      <a ng-click="getQuotes('Religion')">Religion</a></br>
+      <a ng-click="getQuotes('Technology')">Technology</a>
+    </div>
+    <div class="col-md-9">
+      Recent Post</br>
+      "{{quoteList[(quoteList.length-1)].name}}" by {{quoteList[(quoteList.length-1)].author}} [{{quoteList[(quoteList.length-1)].category}}]
+    </div>
+  </div>
+  <div class="container bottom-wrapper">
+    <div class="col-md-10">
       <div class="row quotes-list">
-        <a ng-click="load()">Show All Quotes</a>({{quoteList.length}})
         <ul class="list-group" ng-show="showQs">
           <li class="list-group-item" ng-repeat="quote in quoteList">
-            "{{quote.name}}" by {{quote.author}} [{{quote.category}}]
-            <span class="badge">
+            "{{quote.name}}"</br> by {{quote.author}} [{{quote.category}}]
+            <span>
               <button type="button" class="btn btn-info glyphicon glyphicon-pencil" ng-click="editQuote(quoteList[$index], $index)">Edit</button>
             </span>
-            <span style="background-color: #d9534f" class="badge">
-              <a class="glyphicon glyphicon-trash" ng-click="delete($index)">Delete</a>
+            <span>
+              <button type="button" class="glyphicon glyphicon-trash btn btn-danger" ng-click="delete($index)">Delete</button>
             </span>
-            <span class="badge">
-              <a class="glyphicon glyphicon-thumbs-up btn btn-primary" ng-click="like($index)"></a>{{quote.ratings.likes}}likes
+            <span >
+              <button type="button" class="glyphicon glyphicon-thumbs-up btn btn-primary" ng-click="like($index)"></button>{{quote.ratings.likes}} likes
             </span>
-            <span class="badge">
-              <a class="glyphicon glyphicon-thumbs-down btn btn-primary" ng-click="dislike($index)"></a>{{quote.ratings.dislikes}} dislikes
+            <span>
+              <button type="button" class="glyphicon glyphicon-thumbs-down btn btn-primary" ng-click="dislike($index)"></button>{{quote.ratings.dislikes}} dislikes
             </span>
           </li>
         </ul>
+        <ul class="list-group" ng-show="hideQs">
+          <li class="list-group-item" ng-repeat="x in allQuotes">
+            <span>"{{x.name}}" by {{x.author}}</span>
+          </li>
+        </ul>
       </div>
-      <a ng-click="getQuotes('entertainment')">Entertainment</a></br>
-      <a ng-click="getQuotes('fashion')">Fashion</a></br>
-      <a ng-click="getQuotes('love')">Love</a></br>
-      <a ng-click="getQuotes('religion')">Religion</a></br>
-      <a ng-click="getQuotes('tech')">Technology</a>
-      <ul ng-show="hideQs">
-        <li ng-repeat="x in allQuotes">
-          <span>"{{x.name}}" by {{x.author}}</span>
-        </li>
-      </ul>
     </div>
   </div>
   <br>
+
+
   <script type="text/javascript" src="app.js"></script>
   <script type="text/ng-template" id="modal.html">
     <div class="modal fade">
