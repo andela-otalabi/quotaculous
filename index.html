@@ -23,22 +23,24 @@
   <!-- Trigger the modal with a button -->
   <div class="container main-wrapper">
     <div class="row">
-      <div class="col-md-10">
-        <input type="textbox" placeholder="enter author's name" ng-model="author" />
-        <input id="quote" type="textbox" placeholder="enter new quote here" ng-model="quoteName" />
-      </div>
-      <div class="col-md-2 dropdown-wrapper">
-        Category
-        <select class="btn btn-default select-btn" ng-model="category">
-          <option value="Entertainment">Entertainment</option>
-          <option value="Fashion">Fashion</option>
-          <option value="Love">Love</option>
-          <option value="Religion">Religion</option>
-          <option value="Technology">Technology</option>
-        </select>
-        <br />
-        <button class="btn btn-default" ng-click="submit()">Submit</button>
-      </div>
+      <form name="createQuotes" ng-submit="submit(createQuotes.$valid)" novalidate>
+        <div class="col-md-10">
+          <input type="textbox" name="author" placeholder="enter author's name" ng-model="author" required />
+          <input id="quote" name="quoteName" type="textbox" placeholder="enter new quote here" ng-model="quoteName" required />
+        </div>
+        <div class="col-md-2 dropdown-wrapper">
+          Category
+          <select name="category" class="btn btn-default select-btn" ng-model="category" required>
+            <option value="Entertainment">Entertainment</option>
+            <option value="Fashion">Fashion</option>
+            <option value="Love">Love</option>
+            <option value="Religion">Religion</option>
+            <option value="Technology">Technology</option>
+          </select>
+          <br />
+          <button type="submit" class="btn btn-default">Submit</button>
+        </div>
+      </form>
     </div>
   </div>
   <div class="container bottom-wrapper">
@@ -85,6 +87,8 @@
   </div>
   <br>
   <script type="text/javascript" src="app.js"></script>
+  <script type="text/javascript" src="controllers/edit_controller.js"></script>
+  <script type="text/javascript" src="controllers/main_controller.js"></script>
   <script type="text/ng-template" id="modal.html">
     <div class="modal fade">
       <div class="modal-dialog">
