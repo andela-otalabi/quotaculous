@@ -54,7 +54,10 @@
     </div>
     <div class="col-md-9">
       Recent Post</br>
-      "{{quoteList[(quoteList.length-1)].name}}" by {{quoteList[(quoteList.length-1)].author}} [{{quoteList[(quoteList.length-1)].category}}]
+      <span ng-bind="quoteList[(quoteList.length-1)].name"></span>
+      <span>by<span>
+      <span ng-bind="quoteList[(quoteList.length-1)].author"></span>
+      <span ng-bind="quoteList[(quoteList.length-1)].category"></span>
     </div>
   </div>
   <div class="container bottom-wrapper">
