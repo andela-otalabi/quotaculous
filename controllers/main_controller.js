@@ -4,7 +4,6 @@ app.controller('main', ['$scope', 'localStorageService', 'ModalService', functio
 
   if (localStorageService.get('quotes')) {
     $scope.quoteList = localStorageService.get('quotes');
-
   } else {
     $scope.quoteList = [];
   }
