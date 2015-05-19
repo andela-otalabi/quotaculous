@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html ng-app="root">
+
+<head>
+  <script src="bower_components/jquery/dist/jquery.js"></script>
+  <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="bower_components/angular/angular.min.js"></script>
+  <script src="bower_components/angular-local-storage/dist/angular-local-storage.min.js"></script>
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+  <script src="bower_components/angular-modal-service/dst/angular-modal-service.min.js"></script>
+  <link type="text/css" rel="stylesheet" href="style.css" />
+  <title>Quotaculous</title>
+</head>
+
+<body ng-controller="main">
+  <nav class="navbar navbar-default">
+    <div class="container">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">Quotaculous</a>
+      </div>
+    </div>
+  </nav>
+  <!-- Trigger the modal with a button -->
+  <div class="container main-wrapper">
+    <div class="row">
+      <form name="createQuotes" ng-submit="submit(createQuotes.$valid)" novalidate>
+        <div class="col-md-10">
+          <input type="textbox" name="author" placeholder="enter author's name" ng-model="author" required />
+          <input id="quote" name="quoteName" type="textbox" placeholder="enter new quote here" ng-model="quoteName" required />
+        </div>
+        <div class="col-md-2 dropdown-wrapper">
+          Category
+          <select name="category" class="btn btn-default select-btn" ng-model="category" required>
+            <option value="Entertainment">Entertainment</option>
+            <option value="Fashion">Fashion</option>
+            <option value="Love">Love</option>
+            <option value="Religion">Religion</option>
+            <option value="Technology">Technology</option>
+          </select>
+          <br />
+          <button type="submit" class="btn btn-default">Submit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="container bottom-wrapper">
+    <div class="col-md-3">
+      <a ng-click="load()">View All Quotes</a>({{quoteList.length}})</br>
+      <a ng-click="getQuotes('Entertainment')">Entertainment</a></br>
+      <a ng-click="getQuotes('Fashion')">Fashion</a></br>
+      <a ng-click="getQuotes('Love')">Love</a></br>
+      <a ng-click="getQuotes('Religion')">Religion</a></br>
+      <a ng-click="getQuotes('Technology')">Technology</a>
+    </div>
+    <div class="col-md-9">
+      Recent Post</br>
+      <span ng-bind="quoteList[(quoteList.length-1)].name"></span>
+      <span>by<span>
+      <span ng-bind="quoteList[(quoteList.length-1)].author"></span>
+      <span ng-bind="quoteList[(quoteList.length-1)].category"></span>
+    </div>
+  </div>
+  <my-view></my-view>
+  <br>
+  <script type="text/javascript" src="app.js"></script>
+  <script type="text/javascript" src="controllers/edit_controller.js"></script>
+  <script type="text/javascript" src="controllers/main_controller.js"></script>
+  <script type="text/javascript" src="directives/myQuote.js"></script>
+
+  <script type="text/ng-template" id="modal.html">
+    <div class="modal fade">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" ng-click="close('Cancel')" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title">Edit Quote</h4>
+          </div>
+          <div class="modal-body">
+            <form>
+              <input type="textbox" placeholder="enter author's name" ng-model="editQuote.author" />
+              <input id="quote" type="textbox" placeholder="enter new quote here" ng-model="editQuote.name" />
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" ng-click="close()" class="btn btn-primary" data-dismiss="modal">Save</button>
+            <button type="button" ng-click="cancel()" class="btn btn-default" data-dismiss="modal">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </script>
+</body>
+
+</html>

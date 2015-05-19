@@ -1,0 +1,28 @@
+  <div class="container bottom-wrapper">
+    <div class="col-md-10">
+      <div class="row quotes-list">
+        <ul class="list-group" ng-show="showQs">
+          <li class="list-group-item" ng-repeat="quote in quoteList">
+            "{{quote.name}}" by {{quote.author}} Category: {{quote.category}}
+            <span>
+              <button type="button" class="btn btn-info glyphicon glyphicon-pencil" ng-click="editQuote(quoteList[$index], $index)">Edit</button>
+            </span>
+            <span>
+              <button type="button" class="glyphicon glyphicon-trash btn btn-danger" ng-click="delete($index)">Delete</button>
+            </span>
+            <span>
+              <button type="button" class="glyphicon glyphicon-thumbs-up btn btn-primary" ng-click="like($index)"></button>{{quote.ratings.likes}} like
+            </span>
+            <span>
+              <button type="button" class="glyphicon glyphicon-thumbs-down btn btn-primary" ng-click="dislike($index)"></button>{{quote.ratings.dislikes}} dislike
+            </span>
+          </li>
+        </ul>
+        <ul class="list-group" ng-show="hideQs">
+          <li class="list-group-item" ng-repeat="x in allQuotes">
+            <span>"{{x.name}}" by {{x.author}}</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
