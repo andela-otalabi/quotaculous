@@ -6,6 +6,7 @@
 
 app.directive('myView', function(){
   return {
+    restric: 'E',
     templateUrl: 'templates/myquote.html'
   };
 });

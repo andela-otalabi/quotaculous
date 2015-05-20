@@ -1,1 +1,1 @@
-var app = angular.module('root', ['LocalStorageModule', 'angularModalService']);
+var app = angular.module('quoteApp', ['LocalStorageModule', 'angularModalService']);

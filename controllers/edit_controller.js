@@ -1,4 +1,4 @@
-var app = angular.module('root');
+var app = angular.module('quoteApp');
 
 app.controller('edit', ['$scope', 'localStorageService', 'ModalService', 'quote', 'close', function($scope, localStorageService, ModalService, quote, close) {
   $scope.editQuote = angular.copy(quote); // creates a copy of quote and assign it to the editted quote

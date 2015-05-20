@@ -1,11 +1,12 @@
-var app = angular.module('root');
+var app = angular.module('quoteApp');
 
 app.controller('main', ['$scope', 'localStorageService', 'ModalService', function($scope, localStorageService, ModalService) {
 
   if (localStorageService.get('quotes')) {
     $scope.quoteList = localStorageService.get('quotes');
   } else {
-    $scope.quoteList = [];
+    $scope.quoteList = [{'name': "lobveee", 'author': "jhjskjkj", 'category': "Love", ratings: {'likes': 1, 'dislikes': 0}},
+    {'name': "lobveee", 'author': "jhjskjkj", 'category': "Love", ratings: {'likes': 1, 'dislikes': 0}}];
   }
 
   $scope.hideQs = false;
@@ -47,7 +48,7 @@ app.controller('main', ['$scope', 'localStorageService', 'ModalService', functio
       //it's a bootstrap element, use 'modal' to show it
       modal.element.modal();
       modal.close.then(function(result) {
-        console.log('after editing this is the quote', result);
+        
         $scope.quoteList[index] = result;
         localStorageService.set('quotes', $scope.quoteList);
       });
