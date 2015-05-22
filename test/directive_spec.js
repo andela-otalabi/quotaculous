@@ -1,21 +1,20 @@
-describe('tips directives', function() {
+describe('testing my view directive', function() {
+  beforeEach(module('quoteApp'));
+  beforeEach(module('templates/myquote.html'));
+  beforeEach(inject(function($rootScope, $compile) {
+    elm = angular.element('<body><view></view></body>');
 
-    var element, $scope, doc, $compile;
+    scope = $rootScope;
+    $compile(elm)(scope); // loads the elm into the DOM
+    scope.$digest(); // tell angular to update itself
+  }));
 
-    beforeEach(inject(function(_$compile_, _$rootScope_, _$document_) {
-        $scope = _$rootScope_;
-        $compile = _$compile_;
-        doc = _$document_;
-        var span = angular.element("<div><my-view></my-view></div>");
-        element = angular.element(doc[0].body).append(span);
-        console.log(span);
-        $compile(element)($scope);
-        $scope.$digest();
-    }));
 
-    it('be able to see this', function() {
-        //var tooltip = 'Let intro to the person via email.';
-        console.log(element.html());
-        //expect((element).html()).toContain("div");
-    });
+
+  it('should create clickable titles', function() {
+    console.log(elm.html()); // gets the content of elm
+    //var div = elm.find('div.quotes-list');
+    //console.log("hello",div.length);
+    expect(elm.html()).toMatch(/quotes\-list/); // use regExp to check if the div with the class exits
+});
 });

@@ -15,24 +15,29 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-        'bower_components/angular/angular.js',
-        'bower_components/angular-mocks/angular-mocks.js',
-        'bower_components/angular-local-storage/dist/angular-local-storage.js',
-        'bower_components/angular-modal-service/dst/angular-modal-service.min.js',
-        'app.js',
-        'controllers/main_controller.js',
-        'test/*.js'
+      'bower_components/angular/angular.js',
+      'bower_components/angular-mocks/angular-mocks.js',
+      'bower_components/angular-local-storage/dist/angular-local-storage.js',
+      'bower_components/jquery/dist/jquery.js',
+      'bower_components/bootstrap/dist/js/bootstrap.min.js',
+      'app.js',
+      'controllers/main_controller.js',
+      'controllers/edit_controller.js',
+      'directives/myQuote.js',
+      'bower_components/angular-modal-service/dst/angular-modal-service.min.js',
+      'templates/myquote.html',
+      'test/*.js'
     ],
 
 
     // list of files to exclude
-    exclude: [
-    ],
+    exclude: [],
 
 
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
+      'templates/myquote.html': 'html2js'
     },
 
 

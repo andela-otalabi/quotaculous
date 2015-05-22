@@ -23,5 +23,8 @@
     "karma-cli": "0.0.4",
     "karma-firefox-launcher": "^0.1.6",
     "karma-jasmine": "^0.3.5"
+  },
+  "devDependencies": {
+    "karma-ng-html2js-preprocessor": "^0.1.2"
   }
 }

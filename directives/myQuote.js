@@ -4,7 +4,7 @@
   };
 });*/
 
-app.directive('myView', function(){
+app.directive('view', function(){
   return {
     restric: 'E',
     templateUrl: 'templates/myquote.html'
