@@ -39,7 +39,7 @@ app.controller('main', ['$scope', 'localStorageService', 'ModalService', functio
 
       $scope.quoteList.push(quote);
       localStorageService.set('quotes', $scope.quoteList);
-      var quoteSaved = alert("Your quote has been saved");
+      //var quoteSaved = alert("Your quote has been saved");
       //clears input field on submit
       $scope.quoteName = '';
       $scope.author = '';
@@ -66,7 +66,10 @@ app.controller('main', ['$scope', 'localStorageService', 'ModalService', functio
   };
 
   $scope.delete = function(index) {
-    var delQuote = confirm("Are you sure you want to delete?");
+
+    $scope.quoteList.splice(index, 1);
+      localStorageService.set('quotes', $scope.quoteList);
+    //var delQuote = confirm("Are you sure you want to delete?");
     if (delQuote === true) {
       $scope.quoteList.splice(index, 1);
       localStorageService.set('quotes', $scope.quoteList);
@@ -102,6 +105,6 @@ app.controller('main', ['$scope', 'localStorageService', 'ModalService', functio
 
   $scope.load = function() {
     $scope.showQs = !$scope.showQs;
-    $scope.quoteList = localStorageService.get('quotes');
+    //$scope.quoteList = localStorageService.get('quotes');
   };
 }]);

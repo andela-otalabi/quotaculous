@@ -3,12 +3,12 @@
       <div class="row quotes-list">
         <ul class="list-group" ng-show="showQs">
           <li class="list-group-item" ng-repeat="quote in quoteList">
-            "{{quote.name}}" by {{quote.author}} Category: {{quote.category}}
+            "<span id="new-name">{{quote.name}}</span>" by {{quote.author}} Category: {{quote.category}}
             <span>
-              <button type="button" class="btn btn-info glyphicon glyphicon-pencil" ng-click="editQuote(quoteList[$index], $index)">Edit</button>
+              <button type="button" id="editQuote" class="btn btn-info glyphicon glyphicon-pencil" ng-click="editQuote(quoteList[$index], $index)">Edit</button>
             </span>
             <span>
-              <button type="button" class="glyphicon glyphicon-trash btn btn-danger" ng-click="delete($index)">Delete</button>
+              <button type="button" id="{{quote.author}}" class="glyphicon glyphicon-trash btn btn-danger" ng-click="delete($index)">Delete</button>
             </span>
             <span>
               <button type="button" class="glyphicon glyphicon-thumbs-up btn btn-primary" ng-click="like($index)"></button>{{quote.ratings.likes}} like
