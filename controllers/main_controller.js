@@ -5,16 +5,8 @@ app.controller('main', ['$scope', 'localStorageService', 'ModalService', functio
   $scope.refresh = function() {
     if (localStorageService.get('quotes')) {
       $scope.quoteList = localStorageService.get('quotes');
-    } else {
-      $scope.quoteList = [{
-        'name': "lobveee",
-        'author': "jhjskjkj",
-        'category': "Love",
-        ratings: {
-          'likes': 1,
-          'dislikes': 0
-        }
-      }];
+    }else {
+      $scope.quoteList = [];
     }
   };
 
@@ -66,10 +58,7 @@ app.controller('main', ['$scope', 'localStorageService', 'ModalService', functio
   };
 
   $scope.delete = function(index) {
-
-    $scope.quoteList.splice(index, 1);
-      localStorageService.set('quotes', $scope.quoteList);
-    //var delQuote = confirm("Are you sure you want to delete?");
+    var delQuote = confirm("Are you sure you want to delete?");
     if (delQuote === true) {
       $scope.quoteList.splice(index, 1);
       localStorageService.set('quotes', $scope.quoteList);
